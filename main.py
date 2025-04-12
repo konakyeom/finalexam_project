@@ -24,7 +24,7 @@ status_label.pack(pady=10)
 
 # 달걀 이미지 초기화 (Image 객체 사용)
 egg_image = ctk.CTkLabel(app, text="🥚", font=("Arial", 100))
-egg_image.pack(pady=20)
+egg_image.place(x=150, y=200)  # 원하는 초기 위치를 지정
 
 # 프로그레스 바
 progress = ctk.CTkProgressBar(app, width=300)
@@ -44,7 +44,7 @@ def start_timer(minutes):
 
     # 이미지 업데이트 함수
     def update_egg_image(state):
-        #이모지 제거
+        # 이모지 제거
         egg_image.configure(text="")
 
         if state == "raw":
@@ -58,21 +58,7 @@ def start_timer(minutes):
         egg_image.configure(image=egg_img)  # Label에 이미지 설정
         egg_image.image = egg_img  # 이미지 참조를 유지하기 위해 설정
 
-    def shake_egg():
-        positions = [(-5, 0), (5, 0)] * 5  # 좌우로 5번 흔들기
-        original_x = egg_image.winfo_x()
-        original_y = egg_image.winfo_y()
-
-        def move(i=0):
-            if i < len(positions):
-                dx, dy = positions[i]
-                egg_image.place(x=original_x + dx, y=original_y + dy)
-                app.after(50, move, i + 1)
-            else:
-                egg_image.place(x=original_x, y=original_y)  # 원래 위치로 복귀
-
-        move()
-
+    # 타이머 카운트다운 함수
     def countdown():
         for t in range(seconds, 0, -1):
             m, s = divmod(t, 60)
@@ -90,7 +76,6 @@ def start_timer(minutes):
             time.sleep(1)
         
         # 완료 시
-        
         result = get_result_text(minutes)
         status_label.configure(text=f"✅ 완료! → {result}")
         play_sound(r"C:\finalterm\eggtimer\sound\done_beep1.wav")
@@ -100,9 +85,6 @@ def start_timer(minutes):
         egg_image.image = None              # 참조 제거 (안 하면 이전 이미지가 남아있을 수 있음)
         egg_image.configure(text="🥚")      # 텍스트만 표시
 
-        # 흔들리는 애니메이션 실행
-
-        shake_egg()
     Thread(target=countdown, daemon=True).start()
 
 # 결과 문구 반환
