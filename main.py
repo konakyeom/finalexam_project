@@ -24,7 +24,7 @@ status_label.pack(pady=10)
 
 # 달걀 이미지 초기화 (Image 객체 사용)
 egg_image = ctk.CTkLabel(app, text="🥚", font=("Arial", 100))
-egg_image.place(x=150, y=200)  # 원하는 초기 위치를 지정
+egg_image.pack(pady=20)
 
 # 프로그레스 바
 progress = ctk.CTkProgressBar(app, width=300)
@@ -44,7 +44,7 @@ def start_timer(minutes):
 
     # 이미지 업데이트 함수
     def update_egg_image(state):
-        # 이모지 제거
+        #이모지 제거
         egg_image.configure(text="")
 
         if state == "raw":
@@ -58,7 +58,6 @@ def start_timer(minutes):
         egg_image.configure(image=egg_img)  # Label에 이미지 설정
         egg_image.image = egg_img  # 이미지 참조를 유지하기 위해 설정
 
-    # 타이머 카운트다운 함수
     def countdown():
         for t in range(seconds, 0, -1):
             m, s = divmod(t, 60)
@@ -76,6 +75,7 @@ def start_timer(minutes):
             time.sleep(1)
         
         # 완료 시
+        
         result = get_result_text(minutes)
         status_label.configure(text=f"✅ 완료! → {result}")
         play_sound(r"C:\finalterm\eggtimer\sound\done_beep1.wav")
