@@ -58,6 +58,21 @@ def start_timer(minutes):
         egg_image.configure(image=egg_img)  # Label에 이미지 설정
         egg_image.image = egg_img  # 이미지 참조를 유지하기 위해 설정
 
+    def shake_egg():
+        positions = [(-5, 0), (5, 0)] * 5  # 좌우로 5번 흔들기
+        original_x = egg_image.winfo_x()
+        original_y = egg_image.winfo_y()
+
+        def move(i=0):
+            if i < len(positions):
+                dx, dy = positions[i]
+                egg_image.place(x=original_x + dx, y=original_y + dy)
+                app.after(50, move, i + 1)
+            else:
+                egg_image.place(x=original_x, y=original_y)  # 원래 위치로 복귀
+
+        move()
+
     def countdown():
         for t in range(seconds, 0, -1):
             m, s = divmod(t, 60)
@@ -79,8 +94,15 @@ def start_timer(minutes):
         result = get_result_text(minutes)
         status_label.configure(text=f"✅ 완료! → {result}")
         play_sound(r"C:\finalterm\eggtimer\sound\done_beep1.wav")
-        egg_image.configure(image=None, text="🥚")
+        
+        # 이미지 제거 + 텍스트만 다시 설정 (겹침 방지)
+        egg_image.configure(image=None)     # 이미지 제거
+        egg_image.image = None              # 참조 제거 (안 하면 이전 이미지가 남아있을 수 있음)
+        egg_image.configure(text="🥚")      # 텍스트만 표시
 
+        # 흔들리는 애니메이션 실행
+
+        shake_egg()
     Thread(target=countdown, daemon=True).start()
 
 # 결과 문구 반환
