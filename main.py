@@ -104,10 +104,10 @@ def make_timer_button(label, mins, color="#FFD6E8"):
     return button
 
 # 버튼 생성
-btn1 = make_timer_button("🥚 노른자 흘러내림 4분", 4, "#FFD6E8")
-btn2 = make_timer_button("🥚 노른자 거의 익음 6분", 6, "#FFF3B0")
-btn3 = make_timer_button("🍳 노른자 부드러움 8분", 8, "#C2F0C2")
-btn4 = make_timer_button("🍳 노른자 퍽퍽함 10분", 10, "#BDE0FE")
+btn1 = make_timer_button("🥚 흐르는 반숙 4분", 4, "#FFD6E8")
+btn2 = make_timer_button("🥚 꾸덕한 반숙 6분", 6, "#FFF3B0")
+btn3 = make_timer_button("🍳 부드러운 완숙 8분", 8, "#C2F0C2")
+btn4 = make_timer_button("🍳 단단한 완숙 10분", 10, "#BDE0FE")
 
 # 버튼 배치 (2줄)
 btn1.grid(row=0, column=0, padx=10, pady=10)
