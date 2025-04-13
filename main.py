@@ -103,15 +103,23 @@ button_frame = ctk.CTkFrame(app)
 button_frame.pack(pady=20)
 
 # 각 버튼 생성 (애니메이션 효과 포함)
-def make_timer_button(label, mins, color="#FFD6E8"):
-    button = ctk.CTkButton(button_frame, text=label, command=lambda: start_timer(mins), width=140, height=40, fg_color=color, hover_color="FFFFFF", text_color="black")
-    return button
+def make_timer_button(label, mins, color, hover):
+    return ctk.CTkButton(
+        button_frame,
+        text=label,
+        command=lambda: start_timer(mins),
+        width=140,
+        height=40,
+        fg_color=color,
+        hover_color=hover,
+        text_color="black"
+    )
 
 # 버튼 생성
-btn1 = make_timer_button("🥚 흐르는 반숙 4분", 4, "#FFD6E8")
-btn2 = make_timer_button("🥚 꾸덕한 반숙 6분", 6, "#FFF3B0")
-btn3 = make_timer_button("🍳 부드러운 완숙 8분", 8, "#C2F0C2")
-btn4 = make_timer_button("🍳 단단한 완숙 10분", 10, "#BDE0FE")
+btn1 = make_timer_button("🥚 흐르는 반숙 4분", 4, "#FFD6E8", "#FFB6C1")
+btn2 = make_timer_button("🥚 꾸덕한 반숙 6분", 6, "#FFF3B0", "#F9D342")
+btn3 = make_timer_button("🍳 부드러운 완숙 8분", 8, "#C2F0C2", "#90EE90")
+btn4 = make_timer_button("🍳 단단한 완숙 10분", 10, "#BDE0FE", "#89CFF0")
 
 # 버튼 배치 (2줄)
 btn1.grid(row=0, column=0, padx=10, pady=10)
